@@ -148,6 +148,5 @@ namespace Transportation_Card
             newWindow.Show();
             this.Close();
         }
-
     }
 }
