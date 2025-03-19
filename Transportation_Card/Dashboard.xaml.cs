@@ -25,13 +25,13 @@ namespace Transportation_Card
 
             _authService = new AuthService();
             _loggedInUser = user;
-            _loggedInUserId = user.ID;
+            _loggedInUserId = user.ID; 
             txtUsername.Text = user.Email;
             txtFullName.Text = user.FullName;
             txtCardType.Text = user.CardNumber;
 
             MainSnackbar.MessageQueue = MessageQueue;
-
+            
             ShowSnackbar();
             DisplayCardType();
             LoadUserDetails();
@@ -52,9 +52,11 @@ namespace Transportation_Card
         }
 
 
+
+
         private void DisplayCardType()
         {
-            lblCardType.Content = $"{_loggedInUser.GetCardType()}";
+            lblCardType.Content = $"Card Type: {_loggedInUser.GetCardType()}";
         }
 
         private void ReloadCard_Click(object sender, RoutedEventArgs e)
@@ -92,8 +94,12 @@ namespace Transportation_Card
                 MessageBox.Show("Please enter a valid amount.");
             }
         }
-
-
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow newWindow = new MainWindow(); // Assuming you have a NewWindow.xaml
+            newWindow.Show();
+            this.Close();
+        }
 
         private void ShowSnackbar()
         {

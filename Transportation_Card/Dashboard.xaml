@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Transportation_Card"
         mc:Ignorable="d"
-        Title="Dashboard" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Dashboard" Height="500" Width="800" WindowStartupLocation="CenterScreen"
         >
     <Grid>
         <Border Background="White" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Padding="20" Margin="23,0,0,0" Width="400" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left">
@@ -32,14 +32,18 @@
             </StackPanel>
         </Border>
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="525,0,0,146">
-            <TextBlock Text="Username:" FontWeight="Bold"/>
+            <TextBlock Text="Username:"/>
             <TextBlock x:Name="txtUsername" Margin="0,0,0,10"/>
-            <TextBlock Text="Load:" FontWeight="Bold"/>
+            <TextBlock Text="Balance:"/>
             <TextBlock x:Name="txtInitialLoad" Margin="0,0,0,0"/>
-            <TextBlock Text="Reload Amount:" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock Text="Reload Amount:" Margin="0,0,0,10"/>
             <TextBox x:Name="txtReloadAmount" Width="200" Height="40" Margin="0,0,0,10"/>
-            <Button Content="Reload Card" Click="ReloadCard_Click" Width="200"/>
+            <Button Content="Reload Card" Background="Green" Click="ReloadCard_Click" Width="200"/>
         </StackPanel>
+
+        <Button Content="Logout" Background="Red" Click="Logout_Click" Width="100" Height="35" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,422,24,0"/>
+
+
         <md:Snackbar x:Name="MainSnackbar"
                      MessageQueue="{Binding MessageQueue}"
                      VerticalAlignment="Bottom"

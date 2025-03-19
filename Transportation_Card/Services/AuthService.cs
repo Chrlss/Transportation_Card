@@ -60,7 +60,8 @@ namespace Transportation_Card.Services
                     Address = address,
                     DateOfBirth = dateOfBirth,
                     MobileNumber = mobileNumber,
-                    CardNumber = cardNumber
+                    CardNumber = cardNumber,
+                    InitialLoad = 300m // Set initial load for regular users
                 };
 
                 context.Users.Add(newUser);
@@ -72,22 +73,18 @@ namespace Transportation_Card.Services
         {
             using (var context = new UsersDbContext())
             {
-                if (context.Users.Any(u => u.Username == username))
-                {
-                    throw new ArgumentException("Username already exists.");
-                }
-
-                if (cardType == "SeniorCitizen" && !ValidateSeniorCitizenCard(cardNumber))
+                if (cardType == "SeniorCitizen" && !ValidateSeniorCitizenCard(SeniorCitizenCard))
                 {
                     throw new ArgumentException("Invalid Senior Citizen Card format.");
                 }
 
-                if (cardType == "PWD" && !ValidatePwdId(cardNumber))
+                if (cardType == "PWD" && !ValidatePwdId(PwdId))
                 {
                     throw new ArgumentException("Invalid PWD ID format.");
                 }
 
-                var cardNumberGenerated = cardNumber;  // Use the provided card number instead of generating a new one
+                // Generate a new card number if the provided card number is null or empty
+                var cardNumberGenerated = string.IsNullOrEmpty(cardNumber) ? GenerateCardNumber() : cardNumber;
 
                 var newUser = new User
                 {
@@ -111,11 +108,12 @@ namespace Transportation_Card.Services
             }
         }
 
+
         public string GenerateCardNumber()
         {
             string prefix = "C-";
             var lastUser = _context.Users
-                .Where(u => !string.IsNullOrEmpty(u.CardNumber))
+                .Where(u => u.CardNumber != null && u.CardNumber != "")
                 .OrderByDescending(u => u.ID)
                 .FirstOrDefault();
 
@@ -137,8 +135,10 @@ namespace Transportation_Card.Services
             }
 
             // Return the generated card number formatted to 12 digits
-            return "C-" + Guid.NewGuid().ToString("N").Substring(0, 12).ToUpper();
+            return prefix + nextNumber.ToString("D12");
         }
+
+
 
         public bool ReloadCard(int userId, decimal amount)
         {
@@ -195,13 +195,7 @@ namespace Transportation_Card.Services
             return user;
         }
 
-        public User GetUserFromDatabase(int userId)
-        {
-            using (_context)
-            {
-                return _context.Users.FirstOrDefault(u => u.ID == userId); // Assuming userId is primary key
-            }
-        }
+
 
         public void UseCard(int userId, decimal fare, decimal exitFare)
         {

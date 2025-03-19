@@ -38,7 +38,7 @@ namespace Transportation_Card.Models
         public string PasswordHash { get; set; }
 
         [Required, Column(TypeName = "decimal(10,2)")]
-        public decimal InitialLoad { get; set; } = 300m;
+        public decimal InitialLoad { get; set; }
 
         public DateTime? LastUsedDate { get; set; }
 
@@ -47,13 +47,10 @@ namespace Transportation_Card.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        // Computed property for CreatedAt formatted
-        public string CreatedAtFormatted => CreatedAt.ToString("MM/dd/yy");
-
-        // Computed property for ExpirationDate formatted
-        public string? ExpirationDateFormatted => ExpirationDate?.ToString("MM/dd/yy");
         public string SeniorCitizenCard { get; set; }
         public string PwdId { get; set; }
+   
+   
 
         public string GetCardType()
         {

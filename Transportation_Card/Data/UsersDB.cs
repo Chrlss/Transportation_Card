@@ -53,8 +53,6 @@ namespace Transportation_Card.Data
                     .IsRequired()
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.HasIndex(e => e.CardNumber)
-                    .IsUnique();
             });
         }
     }
