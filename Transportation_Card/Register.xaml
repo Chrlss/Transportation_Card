@@ -1,0 +1,77 @@
+﻿<Window x:Class="Transportation_Card.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Transportation_Card" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Register" 
+        Height="800" 
+        Width="700"
+        Background="#eeeeee"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" 
+                      Grid.Column="0" 
+                      Grid.ColumnSpan="2"  VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Full Name:" FontWeight="Bold"/>
+            <TextBox x:Name="txtFullName" Width="300"/>
+            
+            <TextBlock Text="Username:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtUsername" Width="300"/>
+            
+            <TextBlock Text="Email:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtEmail" Width="300"/>
+            
+            <TextBlock Text="Password:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <PasswordBox x:Name="txtPassword" Width="300"/>
+            
+            <TextBlock Text="Address:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtAddress" Width="300"/>
+            
+            <TextBlock Text="Date of Birth:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <DatePicker x:Name="dpDateOfBirth" Width="300"/>
+            
+            <TextBlock Text="Mobile Number:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtMobileNumber" Width="300"/>
+            
+            <TextBlock Text="Card Type:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <ComboBox x:Name="cbCardType" Width="300" SelectedIndex="0" SelectionChanged="CbCardType_SelectionChanged">
+                <ComboBoxItem Content="Regular"/>
+                <ComboBoxItem Content="Senior Citizen"/>
+                <ComboBoxItem Content="PWD"/>
+            </ComboBox>
+            
+            <TextBlock x:Name="lblCardNumber" Text="Card Number:" FontWeight="Bold" Margin="0,10,0,0" Visibility="Collapsed"/>
+            <TextBox x:Name="txtCardNumber" Width="200" Visibility="Collapsed" TextChanged="TxtCardNumber_TextChanged"/>
+            <Button Content="Register" Click="Register_Click" Background="#e69138" Width="200" Margin="50,20,0,0"/>
+            <TextBlock x:Name="txtResult" FontWeight="Bold" Margin="0,20,0,0"/>
+
+            <TextBlock 
+                            Grid.Row="0" 
+                            Grid.Column="0" 
+                            Grid.ColumnSpan="2"
+                            Width="160"
+                            Height="20"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Margin="0, 50, 0, 60">
+            <Hyperlink Click="Hyperlink_Click">
+                Already have an account?
+            </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
