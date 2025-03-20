@@ -37,7 +37,6 @@ namespace Transportation_Card
                 }
             }
         }
-
         private void TxtCardNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (cbCardType.SelectedItem != null)
