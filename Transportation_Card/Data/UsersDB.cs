@@ -14,7 +14,6 @@ namespace Transportation_Card.Data
                 .UseMySQL("server=localhost;database=UsersDB;user=root;password=Family231.;")
                 .LogTo(Console.WriteLine, LogLevel.Information);
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(entity =>

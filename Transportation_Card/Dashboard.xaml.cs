@@ -8,8 +8,6 @@ using MaterialDesignThemes.Wpf;
 using Transportation_Card.Services;
 using System.Globalization;
 
-
-
 namespace Transportation_Card
 {
     public partial class Dashboard : Window
@@ -51,9 +49,6 @@ namespace Transportation_Card
             }
         }
 
-
-
-
         private void DisplayCardType()
         {
             lblCardType.Content = $"Card Type: {_loggedInUser.GetCardType()}";
@@ -80,7 +75,6 @@ namespace Transportation_Card
                     _authService.ReloadCard(_loggedInUserId, amount);
                     MessageBox.Show("Card reloaded successfully!");
 
-                    // Update the displayed initial load
                     _loggedInUser.InitialLoad += amount;
                     txtInitialLoad.Text = string.Format(new CultureInfo("en-PH"), "{0:C}", _loggedInUser.InitialLoad);
                 }
@@ -96,7 +90,7 @@ namespace Transportation_Card
         }
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow newWindow = new MainWindow(); // Assuming you have a NewWindow.xaml
+            MainWindow newWindow = new MainWindow(); 
             newWindow.Show();
             this.Close();
         }

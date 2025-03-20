@@ -61,7 +61,7 @@ namespace Transportation_Card.Services
                     DateOfBirth = dateOfBirth,
                     MobileNumber = mobileNumber,
                     CardNumber = cardNumber,
-                    InitialLoad = 300m // Set initial load for regular users
+                    InitialLoad = 300m 
                 };
 
                 context.Users.Add(newUser);
@@ -83,7 +83,6 @@ namespace Transportation_Card.Services
                     throw new ArgumentException("Invalid PWD ID format.");
                 }
 
-                // Generate a new card number if the provided card number is null or empty
                 var cardNumberGenerated = string.IsNullOrEmpty(cardNumber) ? GenerateCardNumber() : cardNumber;
 
                 var newUser = new User
@@ -117,28 +116,24 @@ namespace Transportation_Card.Services
                 .OrderByDescending(u => u.ID)
                 .FirstOrDefault();
 
-            int nextNumber = 1;  // Default to 1 if no user or card is found
+            int nextNumber = 1;  
 
             if (lastUser != null && !string.IsNullOrEmpty(lastUser.CardNumber))
             {
-                var lastCardNumber = lastUser.CardNumber.Substring(2);  // Get the part after "C-"
+                var lastCardNumber = lastUser.CardNumber.Substring(2);  
 
                 if (lastCardNumber.Length > 0 && int.TryParse(lastCardNumber, out int lastNumber))
                 {
-                    nextNumber = lastNumber + 1;  // Increment by 1 if valid number is found
+                    nextNumber = lastNumber + 1;  
                 }
                 else
                 {
-                    // Handle case where last card number part isn't a valid number
-                    nextNumber = 1; // Reset to 1 if there's a problem with the previous card number
+                    nextNumber = 1; 
                 }
             }
-
-            // Return the generated card number formatted to 12 digits
+           
             return prefix + nextNumber.ToString("D12");
         }
-
-
 
         public bool ReloadCard(int userId, decimal amount)
         {
@@ -180,22 +175,20 @@ namespace Transportation_Card.Services
                     LastUsedDate = u.LastUsedDate,
                     ExpirationDate = u.ExpirationDate,
                     CreatedAt = u.CreatedAt,
-                    SeniorCitizenCard = u.SeniorCitizenCard ?? string.Empty,  // Handle NULL
+                    SeniorCitizenCard = u.SeniorCitizenCard ?? string.Empty, 
                     PwdId = u.PwdId ?? string.Empty
                 })
                 .FirstOrDefault();
 
             if (user != null)
             {
-                // Use a local variable to store the formatted date
+
                 var createdAtFormatted = user.CreatedAt.ToString("MM/dd/yy");
                 var expirationDateFormatted = user.ExpirationDate?.ToString("MM/dd/yy");
             }
 
             return user;
         }
-
-
 
         public void UseCard(int userId, decimal fare, decimal exitFare)
         {
@@ -205,28 +198,24 @@ namespace Transportation_Card.Services
                 throw new InvalidOperationException("User not found.");
             }
 
-            // Check if the user has enough initial load
+     
             if (user.InitialLoad < fare)
             {
                 throw new InvalidOperationException("Insufficient balance.");
             }
 
-            // Deduct the fare from the initial load
             user.InitialLoad -= fare;
 
-            // Set the LastUsedDate if it hasn't been set yet (i.e., this is the first time the card is used)
             if (!user.LastUsedDate.HasValue)
             {
-                user.LastUsedDate = DateTime.Now; // Set to the current date and time
+                user.LastUsedDate = DateTime.Now; 
             }
 
-            // Set the ExpirationDate based on LastUsedDate. If it was set already, update it.
             if (user.LastUsedDate.HasValue)
             {
-                user.ExpirationDate = user.LastUsedDate.Value.AddYears(5); // Set expiration 5 years after LastUsedDate
+                user.ExpirationDate = user.LastUsedDate.Value.AddYears(5); 
             }
 
-            // Save changes to the database
             _context.SaveChanges();
         }
 
