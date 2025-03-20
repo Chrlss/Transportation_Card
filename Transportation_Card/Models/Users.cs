@@ -48,10 +48,9 @@ namespace Transportation_Card.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public string SeniorCitizenCard { get; set; }
+
         public string PwdId { get; set; }
    
-   
-
         public string GetCardType()
         {
             if (!string.IsNullOrEmpty(SeniorCitizenCard) || !string.IsNullOrEmpty(PwdId))
