@@ -144,10 +144,9 @@ namespace Transportation_Card
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow newWindow = new MainWindow(); // Assuming you have a NewWindow.xaml
+            MainWindow newWindow = new MainWindow(); /
             newWindow.Show();
             this.Close();
         }
-
     }
 }

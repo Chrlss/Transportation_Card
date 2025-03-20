@@ -30,13 +30,11 @@ public partial class MainWindow : Window
         string username = txtUsername.Text;
         string password = txtPassword.Password;
 
-        // Call the authentication service
         User loggedInUser = _authService.Login(username, password);
 
-        // Ensure login is successful
-        if (loggedInUser != null) // Check if login was successful
+        if (loggedInUser != null) 
         {
-            Dashboard dashboard = new Dashboard(loggedInUser); // Pass user object
+            Dashboard dashboard = new Dashboard(loggedInUser); 
             dashboard.Show();
             this.Close();
         }
@@ -49,7 +47,7 @@ public partial class MainWindow : Window
 
     private void Hyperlink_Click(object sender, RoutedEventArgs e)
     {
-        Register newWindow = new Register(); // Assuming you have a NewWindow.xaml
+        Register newWindow = new Register(); 
         newWindow.Show();
         this.Close();
     }
